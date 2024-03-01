@@ -71,6 +71,18 @@ export default new Vuex.Store({
     // 统计未完成的任务的条数
     unDoneLength(state) {
       return state.list.filter(x => x.done === false).length
+    },
+    infoList(state) {
+      if (state.viewKey === 'all') {
+        return state.list
+      }
+      if (state.viewKey === 'undone') {
+        return state.list.filter(x => !x.done)
+      }
+      if (state.viewKey === 'done') {
+        return state.list.filter(x => x.done)
+      }
+      return state.list
     }
   },
   modules: {
