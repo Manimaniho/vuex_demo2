@@ -15,9 +15,9 @@
       <div class="footer" slot="footer">
         <span>{{ unDoneLength }}条剩余</span>
         <a-button-group>
-          <a-button type="primary">全部</a-button>
-          <a-button>未完成</a-button>
-          <a-button>已完成</a-button>
+          <a-button :type="viewKey === 'all' ? 'primary' : 'default'" @click="changeList('all')">全部</a-button>
+          <a-button :type="viewKey === 'undone' ? 'primary' : 'default'" @click="changeList('undone')">未完成</a-button>
+          <a-button :type="viewKey === 'done' ? 'primary' : 'default'" @click="changeList('done')">已完成</a-button>
         </a-button-group>
         <a @click="clean">清除已完成</a>
       </div>
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     ...mapGetters(['unDoneLength']),
-    ...mapState(['list', 'inputValue'])
+    ...mapState(['list', 'inputValue', 'viewKey'])
   },
   created() {
     this.$store.dispatch('getList')
@@ -71,6 +71,11 @@ export default {
     // 清除已完成的任务
     clean() {
       this.$store.commit('cleanDone')
+    },
+    // 修改页面上展示的列表数据
+    changeList(key) {
+      console.log(key)
+      this.$store.commit('changeViewKey', key)
     }
   }
 

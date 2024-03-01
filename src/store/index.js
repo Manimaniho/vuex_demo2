@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    viewKey: 'all',
     // 文本框的内容
     inputValue: 'aaa',
     // 所有的任务列表
@@ -13,6 +14,10 @@ export default new Vuex.Store({
     nextId: 5
   },
   mutations: {
+    // 修改视图的关键字
+    changeViewKey(state, key) {
+      state.viewKey = key
+    },
     cleanDone(state) {
       state.list = state.list.filter(x => x.done === false)
     },
