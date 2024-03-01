@@ -6,7 +6,7 @@
     <a-list bordered :dataSource="list" class="dt_list">
       <a-list-item slot="renderItem" slot-scope="item">
         <!-- 复选框 -->
-        <a-checkbox :checked="item.done">{{ item.info }}</a-checkbox>
+        <a-checkbox :checked="item.done" @change="(e) => { cbStatusChanged(e, item.id) }">{{ item.info }}</a-checkbox>
         <!-- 删除链接 -->
         <a slot="actions" @click="removeItemById(item.id)">删除</a>
       </a-list-item>
@@ -56,8 +56,19 @@ export default {
     removeItemById(id) {
       console.log(id)
       this.$store.commit('removeItem', id)
+    },
+    // 监听复选框选中状态变化的事件
+    cbStatusChanged(e, id) {
+      // e.target.checked接收到最新的选中状态
+      console.log(e.target.checked)
+      const param = {
+        id: id,
+        status: e.target.checked
+      }
+      this.$store.commit('changeStatus', param)
     }
   }
+
 }
 </script>
 <style scoped>

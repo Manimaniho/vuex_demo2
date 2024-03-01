@@ -13,6 +13,13 @@ export default new Vuex.Store({
     nextId: 5
   },
   mutations: {
+    // 修改列表项的选中状态
+    changeStatus(state, param) {
+      const i = state.list.findIndex(x => x.id === param.id)
+      if (i !== -1) {
+        state.list[i].done = param.status
+      }
+    },
     // 根据id删除对应的任务事项
     removeItem(state, id) {
       // 根据id查找对应项的索引
