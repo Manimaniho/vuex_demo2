@@ -19,7 +19,7 @@
           <a-button>未完成</a-button>
           <a-button>已完成</a-button>
         </a-button-group>
-        <a>清除已完成</a>
+        <a @click="clean">清除已完成</a>
       </div>
     </a-list>
   </div>
@@ -67,6 +67,10 @@ export default {
         status: e.target.checked
       }
       this.$store.commit('changeStatus', param)
+    },
+    // 清除已完成的任务
+    clean() {
+      this.$store.commit('cleanDone')
     }
   }
 

@@ -13,6 +13,9 @@ export default new Vuex.Store({
     nextId: 5
   },
   mutations: {
+    cleanDone(state) {
+      state.list = state.list.filter(x => x.done === false)
+    },
     // 修改列表项的选中状态
     changeStatus(state, param) {
       const i = state.list.findIndex(x => x.id === param.id)
