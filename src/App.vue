@@ -8,7 +8,7 @@
         <!-- 复选框 -->
         <a-checkbox>{{ item.info }}</a-checkbox>
         <!-- 删除链接 -->
-        <a slot="actions">删除</a>
+        <a slot="actions" @click="removeItemById(item.id)">删除</a>
       </a-list-item>
 
       <!-- footer区域 -->
@@ -51,6 +51,11 @@ export default {
         return this.$message.warning('文本框内容不能为空')
       }
       this.$store.commit('addItem')
+    },
+    // 根据id删除对应的任务事项
+    removeItemById(id) {
+      console.log(id)
+      this.$store.commit('removeItem', id)
     }
   }
 }

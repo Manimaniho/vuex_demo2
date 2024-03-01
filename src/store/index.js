@@ -13,6 +13,15 @@ export default new Vuex.Store({
     nextId: 5
   },
   mutations: {
+    // 根据id删除对应的任务事项
+    removeItem(state, id) {
+      // 根据id查找对应项的索引
+      const i = state.list.findIndex(x => x.id === id)
+      // 根据索引删除对应的元素
+      if (i !== -1) {
+        state.list.splice(i, 1)
+      }
+    },
     // 添加列表项
     addItem(state) {
       const obj = {
